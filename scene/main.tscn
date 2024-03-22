@@ -14,10 +14,24 @@ script = ExtResource("3_8dwax")
 ball_scene = ExtResource("2_uo3ht")
 peg_scene = ExtResource("3_b1ld2")
 
+[node name="SpawnCount" type="Label" parent="Manager"]
+offset_left = 279.0
+offset_top = 590.0
+offset_right = 319.0
+offset_bottom = 613.0
+text = "0"
+
+[node name="Count" type="Label" parent="Manager"]
+offset_left = 850.0
+offset_top = 590.0
+offset_right = 890.0
+offset_bottom = 613.0
+text = "0"
+
 [node name="Bottom" type="StaticBody2D" parent="Manager"]
 position = Vector2(578, 664)
 rotation = 3.14159
-scale = Vector2(0.56, 1)
+scale = Vector2(0.439998, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Manager/Bottom"]
 scale = Vector2(3.15231, 0.149039)
