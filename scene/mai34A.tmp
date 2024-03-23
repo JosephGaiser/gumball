@@ -7,13 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://buqrunxh5mqpe" path="res://scene/balls/yellow.tscn" id="3_veuod"]
 [ext_resource type="PackedScene" uid="uid://c0b4p4dt4sbgf" path="res://scene/balls/red.tscn" id="5_xrxle"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u1vxf"]
-size = Vector2(20.075, 34.5885)
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o8q72"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u1vxf"]
+size = Vector2(20, 21)
+
 [node name="Main" type="Node2D"]
-position = Vector2(388, -85)
+position = Vector2(388, -261)
 
 [node name="Manager" type="Node" parent="."]
 script = ExtResource("3_8dwax")
@@ -22,63 +22,47 @@ yellow_ball = ExtResource("3_veuod")
 green_ball = ExtResource("2_uo3ht")
 red_ball = ExtResource("5_xrxle")
 peg_scene = ExtResource("3_b1ld2")
+spawn_count = null
 
 [node name="SpawnCount" type="Label" parent="Manager"]
 offset_left = 667.0
-offset_top = 747.0
+offset_top = 329.0
 offset_right = 707.0
-offset_bottom = 770.0
+offset_bottom = 352.0
 text = "0"
 metadata/_edit_use_anchors_ = true
 
 [node name="Count" type="Label" parent="Manager"]
 offset_left = 1238.0
-offset_top = 747.0
+offset_top = 329.0
 offset_right = 1278.0
-offset_bottom = 770.0
+offset_bottom = 352.0
 scale = Vector2(0.995934, 1.00363)
 text = "0"
 metadata/_edit_use_anchors_ = true
 
 [node name="Left" type="StaticBody2D" parent="Manager"]
-position = Vector2(570, 471)
+position = Vector2(570, 53)
 rotation = 1.0472
 
 [node name="Sprite2D" type="Sprite2D" parent="Manager/Left"]
-texture_filter = 1
-position = Vector2(67.0742, -0.696263)
-scale = Vector2(-16.6451, 0.424453)
+scale = Vector2(3.15231, 0.149039)
+texture = SubResource("CompressedTexture2D_o8q72")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Manager/Left"]
 scale = Vector2(46.52, 1)
 shape = SubResource("RectangleShape2D_u1vxf")
 
-[node name="Left2" type="StaticBody2D" parent="Manager"]
-position = Vector2(570, 471)
+[node name="Right" type="StaticBody2D" parent="Manager"]
+position = Vector2(1356, 59)
 rotation = 2.09439
 
-[node name="Sprite2D" type="Sprite2D" parent="Manager/Left2"]
-texture_filter = 1
-position = Vector2(67.0742, -0.696263)
-scale = Vector2(-16.6451, 0.424453)
+[node name="Sprite2D" type="Sprite2D" parent="Manager/Right"]
+scale = Vector2(3.15231, 0.149039)
+texture = SubResource("CompressedTexture2D_o8q72")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Manager/Left2"]
-position = Vector2(-82.7704, 10.8227)
-scale = Vector2(25.5897, 1)
-shape = SubResource("RectangleShape2D_u1vxf")
-
-[node name="Left3" type="StaticBody2D" parent="Manager"]
-position = Vector2(1352, 471)
-rotation = 1.0472
-
-[node name="Sprite2D" type="Sprite2D" parent="Manager/Left3"]
-texture_filter = 1
-position = Vector2(67.0742, -0.696263)
-scale = Vector2(-16.6451, 0.424453)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Manager/Left3"]
-position = Vector2(-82.7704, 10.8227)
-scale = Vector2(25.5897, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Manager/Right"]
+scale = Vector2(46.52, 1)
 shape = SubResource("RectangleShape2D_u1vxf")
 
 [node name="Wall" type="StaticBody2D" parent="Manager"]
@@ -120,18 +104,6 @@ texture = SubResource("CompressedTexture2D_o8q72")
 scale = Vector2(46.52, 1)
 shape = SubResource("RectangleShape2D_u1vxf")
 
-[node name="Right" type="StaticBody2D" parent="Manager"]
-position = Vector2(1356, 477)
-rotation = 2.09439
-
-[node name="Sprite2D" type="Sprite2D" parent="Manager/Right"]
-scale = Vector2(3.15231, 0.149039)
-texture = SubResource("CompressedTexture2D_o8q72")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Manager/Right"]
-scale = Vector2(46.52, 1)
-shape = SubResource("RectangleShape2D_u1vxf")
-
 [node name="Wall8" type="StaticBody2D" parent="Manager"]
 position = Vector2(1350, 1061)
 rotation = 1.57079
@@ -159,7 +131,7 @@ scale = Vector2(46.52, 1)
 shape = SubResource("RectangleShape2D_u1vxf")
 
 [node name="Wall10" type="StaticBody2D" parent="Manager"]
-position = Vector2(964, 870)
+position = Vector2(964, 452)
 rotation = 3.14159
 scale = Vector2(0.381993, 1.00038)
 

@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c0unlecwe7pr5" path="res://assets/kenney_input-prompts/Flairs/Default/flair_circle_8.png" id="1_lticr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4x7h3"]
+radius = 23.0
 
 [node name="Node2D" type="Node2D"]
 
