@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://cqhi5uoir44xl" path="res://scene/balls/green.tscn" id="2_uo3ht"]
 [ext_resource type="PackedScene" uid="uid://du2hkcxq2n1vx" path="res://scene/balls/blue.tscn" id="2_vwg40"]
 [ext_resource type="Script" path="res://scripts/Manager.gd" id="3_8dwax"]
-[ext_resource type="PackedScene" uid="uid://cpwgolnbgtuiu" path="res://scene/peg.tscn" id="3_b1ld2"]
 [ext_resource type="PackedScene" uid="uid://buqrunxh5mqpe" path="res://scene/balls/yellow.tscn" id="3_veuod"]
 [ext_resource type="PackedScene" uid="uid://c0b4p4dt4sbgf" path="res://scene/balls/red.tscn" id="5_xrxle"]
+[ext_resource type="PackedScene" uid="uid://142t3xk8xy0o" path="res://scene/pegs/wiggly.tscn" id="6_3dkpc"]
 [ext_resource type="Script" path="res://scripts/sounds.gd" id="7_8jv5c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u1vxf"]
@@ -22,7 +22,7 @@ blue_ball = ExtResource("2_vwg40")
 yellow_ball = ExtResource("3_veuod")
 green_ball = ExtResource("2_uo3ht")
 red_ball = ExtResource("5_xrxle")
-peg_scene = ExtResource("3_b1ld2")
+peg_scene = ExtResource("6_3dkpc")
 
 [node name="SoundManager" type="Control" parent="Manager"]
 layout_mode = 3
