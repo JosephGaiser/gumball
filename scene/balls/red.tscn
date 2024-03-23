@@ -6,7 +6,7 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ytej1"]
 friction = 0.2
-bounce = 0.8
+bounce = 0.2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ry1sh"]
 radius = 22.6667
@@ -15,8 +15,10 @@ radius = 22.6667
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_a7qml")
 collision_sound = ExtResource("2_u276q")
+collision_pitch = 0.405
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+mass = 5.0
 physics_material_override = SubResource("PhysicsMaterial_ytej1")
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]

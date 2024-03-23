@@ -5,8 +5,8 @@
 [ext_resource type="AudioStream" uid="uid://blyufg5ef0xjt" path="res://assets/audio/sound.wav" id="2_fwy74"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ytej1"]
-friction = 0.2
-bounce = 0.8
+friction = 0.3
+bounce = 0.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ry1sh"]
 radius = 22.6667
@@ -15,8 +15,10 @@ radius = 22.6667
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_jsgsn")
 collision_sound = ExtResource("2_fwy74")
+collision_pitch = 1.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+mass = 0.75
 physics_material_override = SubResource("PhysicsMaterial_ytej1")
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
