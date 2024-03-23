@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqhi5uoir44xl"]
+[gd_scene load_steps=6 format=3 uid="uid://cqhi5uoir44xl"]
 
 [ext_resource type="Texture2D" uid="uid://dkjm38nvgfjon" path="res://assets/kenney_input-prompts/Xbox Series/Default/xbox_button_color_a_outline.png" id="1_guick"]
+[ext_resource type="Script" path="res://scene/balls/green.gd" id="1_jsgsn"]
+[ext_resource type="AudioStream" uid="uid://blyufg5ef0xjt" path="res://assets/audio/sound.wav" id="2_fwy74"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ytej1"]
 friction = 0.2
@@ -11,6 +13,8 @@ radius = 22.6667
 
 [node name="Ball" type="Node2D"]
 scale = Vector2(0.75, 0.75)
+script = ExtResource("1_jsgsn")
+collision_sound = ExtResource("2_fwy74")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_ytej1")
@@ -24,3 +28,5 @@ shape = SubResource("CircleShape2D_ry1sh")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="RigidBody2D"]
 scale = Vector2(3.828, 3.24)
+
+[connection signal="body_entered" from="RigidBody2D" to="." method="_on_rigid_body_2d_body_entered"]
