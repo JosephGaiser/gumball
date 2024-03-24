@@ -7,6 +7,7 @@
 script = ExtResource("1_mtm71")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+scale = Vector2(2.66758, 2.68232)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 texture_filter = 1

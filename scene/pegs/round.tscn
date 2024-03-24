@@ -7,6 +7,8 @@
 radius = 23.0
 
 [node name="Round" type="Node2D"]
+texture_filter = 2
+scale = Vector2(1.27279, 1.27279)
 script = ExtResource("1_3yfc3")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
