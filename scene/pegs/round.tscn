@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpwgolnbgtuiu"]
+[gd_scene load_steps=4 format=3 uid="uid://cpwgolnbgtuiu"]
 
+[ext_resource type="Script" path="res://scene/pegs/round.gd" id="1_3yfc3"]
 [ext_resource type="Texture2D" uid="uid://c0unlecwe7pr5" path="res://assets/kenney_input-prompts/Flairs/Default/flair_circle_8.png" id="1_lticr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4x7h3"]
 radius = 23.0
 
-[node name="Node2D" type="Node2D"]
+[node name="Round" type="Node2D"]
+script = ExtResource("1_3yfc3")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

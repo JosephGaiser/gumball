@@ -4,39 +4,43 @@ extends Node
 @export var yellow_ball: PackedScene
 @export var green_ball: PackedScene
 @export var red_ball: PackedScene
-@export var peg_scene: PackedScene
-@export var spawn_count: int = 1
+@export var round_peg: PackedScene
+@export var cross_peg: PackedScene
+@export var spawns_per_click: int = 1
 @export var cooldown_length: float = .01
 
-@onready var floor_collision: CollisionShape2D = $Floor/CollisionShape2D
-@onready var peg_inventory: Dictionary = {"default_peg": {"scene": peg_scene, "count": 10}}
-@onready var active_ball_type: PackedScene = blue_ball
-@onready var cooldown: SceneTreeTimer = get_tree().create_timer(0)
+@onready var peg_inventory: Dictionary = {
+											 PegType.ROUND: {"scene": round_peg, "count": 5},
+											 PegType.CROSS: {"scene": cross_peg, "count": 3}
+										 }
 
+@onready var active_ball_type: PackedScene = blue_ball
+@onready var active_peg_type: PegType = PegType.ROUND
+@onready var cooldown: SceneTreeTimer = get_tree().create_timer(0)
 @onready var ui_count = $"../Control/Count"
 @onready var ui_spawn_count = $"../Control/SpawnCount"
 
-static var can_spawn_balls: bool = true
-var balls_count: int             = 0
-var active_peg: Node
-var active_peg_type: String      = "default_peg"
+var can_spawn_balls: bool = true
+var spawn_count: int      = 0
+var held_peg: Node
+enum PegType {ROUND, CROSS}
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	ui_count.text = str(spawn_count)
-	ui_spawn_count.text = str(balls_count)
+	ui_count.text = str(spawns_per_click)
+	ui_spawn_count.text = str(spawn_count)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if active_peg != null:
-		active_peg.position = get_viewport().get_mouse_position()
+	if held_peg != null:
+		held_peg.position = get_viewport().get_mouse_position()
 
 
 func spawn_ball(position: Vector2, scn: PackedScene):
 	var ball = scn.instantiate()
-	balls_count += 1
+	spawn_count += 1
 
 	# Add a random offset to the position
 	var offset: Vector2 = Vector2(randi_range(-50, 50), randi_range(-50, 50))
@@ -50,7 +54,7 @@ func spawn_ball(position: Vector2, scn: PackedScene):
 	if body != null:
 		body.apply_impulse(Vector2(randf_range(min_x, max_x), randf_range(min_y, max_y)), position)
 	add_child(ball)
-	ui_spawn_count.text = str(balls_count)
+	ui_spawn_count.text = str(spawn_count)
 
 
 func _on_SpawnBall_pressed(event: InputEventMouseButton) -> void:
@@ -60,7 +64,7 @@ func _on_SpawnBall_pressed(event: InputEventMouseButton) -> void:
 	if cooldown.time_left != 0:
 		return
 	cooldown = get_tree().create_timer(cooldown_length)
-	for n in spawn_count:
+	for n in spawns_per_click:
 		spawn_ball(event.position, active_ball_type)
 
 
@@ -75,22 +79,22 @@ func _on_SpawnPeg_pressed(event: InputEventMouseButton) -> void:
 		return
 
 	# Spawn the peg at the event position
-	if active_peg == null:
-		active_peg = peg_inventory[active_peg_type]["scene"].instantiate()
-		active_peg.position = event.position
-		add_child(active_peg)
+	if held_peg == null:
+		held_peg = peg_inventory[active_peg_type]["scene"].instantiate()
+		held_peg.position = event.position
+		add_child(held_peg)
 		# Decrement the peg inventory
 		peg_inventory[active_peg_type]["count"] -= 1
 
 
 func _input(event):
 	if Input.is_action_just_pressed("increase_spawn"):
-		spawn_count += 1
-		ui_count.text = str(spawn_count)
+		spawns_per_click += 1
+		ui_count.text = str(spawns_per_click)
 	if Input.is_action_just_pressed("decrease_spawn"):
-		if spawn_count > 1:
-			spawn_count -= 1
-			ui_count.text = str(spawn_count)
+		if spawns_per_click > 1:
+			spawns_per_click -= 1
+			ui_count.text = str(spawns_per_click)
 
 	if event is InputEventMouseButton:
 		if Input.is_action_just_pressed("spawn_ball"):
@@ -100,8 +104,8 @@ func _input(event):
 			_on_SpawnPeg_pressed(event)
 
 		if Input.is_action_just_released("spawn_peg"):
-			if active_peg != null:
-				active_peg = null
+			if held_peg != null:
+				held_peg = null
 
 
 func _on_drop_pressed():
@@ -113,9 +117,9 @@ func _on_drop_pressed():
 func _on_select_peg_item_selected(index):
 	match index:
 		0:
-			active_peg_type = "default_peg"
+			active_peg_type = PegType.ROUND
 		1:
-			active_peg_type = "cross_peg"
+			active_peg_type = PegType.CROSS
 
 
 func _on_select_ball_item_selected(index):

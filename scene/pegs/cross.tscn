@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfa5gs1jfxgv0"]
+
+[ext_resource type="Script" path="res://scene/pegs/cross.gd" id="1_mtm71"]
+[ext_resource type="Texture2D" uid="uid://c0tra1cqj6163" path="res://assets/kenney_input-prompts/Nintendo Switch/Vector/switch_dpad_none.svg" id="1_o2u7j"]
+
+[node name="Cross" type="Node2D"]
+script = ExtResource("1_mtm71")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture_filter = 1
+texture = ExtResource("1_o2u7j")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-24, -8, -8, -8, -8, -24, 8, -24, 8, -8, 24, -8, 24, 8, 8, 8, 8, 24, -8, 24, -8, 8, -24, 8)

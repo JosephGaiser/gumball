@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://chaeir4y7baof"]
+[gd_scene load_steps=17 format=3 uid="uid://chaeir4y7baof"]
 
 [ext_resource type="Texture2D" uid="uid://cbmxe0xuykdw8" path="res://assets/kenney_input-prompts/Xbox Series/Vector/xbox_button_color_a_outline.svg" id="1_frpd5"]
 [ext_resource type="Texture2D" uid="uid://bpe64s1bcgrjw" path="res://assets/kenney_input-prompts/Generic/Vector/generic_button_square_fill.svg" id="1_pexq0"]
@@ -7,13 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://cqhi5uoir44xl" path="res://scene/balls/green.tscn" id="2_uo3ht"]
 [ext_resource type="PackedScene" uid="uid://du2hkcxq2n1vx" path="res://scene/balls/blue.tscn" id="2_vwg40"]
 [ext_resource type="Script" path="res://scripts/Manager.gd" id="3_8dwax"]
-[ext_resource type="PackedScene" uid="uid://cpwgolnbgtuiu" path="res://scene/pegs/peg.tscn" id="3_b1ld2"]
+[ext_resource type="PackedScene" uid="uid://cpwgolnbgtuiu" path="res://scene/pegs/round.tscn" id="3_b1ld2"]
 [ext_resource type="PackedScene" uid="uid://buqrunxh5mqpe" path="res://scene/balls/yellow.tscn" id="3_veuod"]
 [ext_resource type="Texture2D" uid="uid://r3f8y5rl7pa3" path="res://assets/kenney_input-prompts/Xbox Series/Vector/xbox_button_color_y_outline.svg" id="4_briu2"]
 [ext_resource type="Texture2D" uid="uid://bybftm4ra17a3" path="res://assets/kenney_input-prompts/Generic/Vector/generic_button_circle_outline.svg" id="5_4iw6w"]
 [ext_resource type="PackedScene" uid="uid://c0b4p4dt4sbgf" path="res://scene/balls/red.tscn" id="5_xrxle"]
 [ext_resource type="Texture2D" uid="uid://yl1pnv6i2cof" path="res://assets/kenney_input-prompts/Playdate/Vector/playdate_dpad.svg" id="6_22qqj"]
 [ext_resource type="Script" path="res://scripts/sounds.gd" id="7_8jv5c"]
+[ext_resource type="PackedScene" uid="uid://dfa5gs1jfxgv0" path="res://scene/pegs/cross.tscn" id="14_4mnha"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rpm3j"]
 size = Vector2(20, 22.4698)
@@ -28,22 +29,6 @@ offset_top = 639.0
 offset_right = 524.0
 offset_bottom = 944.0
 
-[node name="Count" type="Label" parent="Control"]
-offset_left = 880.0
-offset_top = 169.0
-offset_right = 890.0
-offset_bottom = 192.0
-text = "0"
-metadata/_edit_use_anchors_ = true
-
-[node name="SpawnCount" type="Label" parent="Control"]
-offset_left = 880.0
-offset_top = 233.0
-offset_right = 1468.84
-offset_bottom = 256.0
-text = "0"
-metadata/_edit_use_anchors_ = true
-
 [node name="Disable Spawn" type="Area2D" parent="Control"]
 position = Vector2(81, 142)
 scale = Vector2(14.6523, 19.3441)
@@ -53,6 +38,24 @@ position = Vector2(0.409491, -0.232624)
 scale = Vector2(1.20799, 0.848943)
 shape = SubResource("RectangleShape2D_rpm3j")
 debug_color = Color(0, 1, 0.701961, 0.211765)
+
+[node name="Count" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 880.0
+offset_top = 169.0
+offset_right = 890.0
+offset_bottom = 192.0
+text = "0"
+metadata/_edit_use_anchors_ = true
+
+[node name="SpawnCount" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 880.0
+offset_top = 233.0
+offset_right = 1468.84
+offset_bottom = 256.0
+text = "0"
+metadata/_edit_use_anchors_ = true
 
 [node name="Box" type="VBoxContainer" parent="Control"]
 layout_mode = 0
@@ -100,7 +103,8 @@ blue_ball = ExtResource("2_vwg40")
 yellow_ball = ExtResource("3_veuod")
 green_ball = ExtResource("2_uo3ht")
 red_ball = ExtResource("5_xrxle")
-peg_scene = ExtResource("3_b1ld2")
+round_peg = ExtResource("3_b1ld2")
+cross_peg = ExtResource("14_4mnha")
 
 [node name="SoundManager" type="Control" parent="Manager"]
 layout_mode = 3
