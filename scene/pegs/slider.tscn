@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c630ojv05jg54"]
+
+[ext_resource type="Script" path="res://scene/pegs/slider.gd" id="1_ks4vk"]
+[ext_resource type="Texture2D" uid="uid://basnd34bbnm7g" path="res://assets/kenney_input-prompts/PlayStation Series/Vector/playstation5_touchpad_outline.svg" id="2_507gs"]
+
+[node name="Cross" type="Node2D"]
+scale = Vector2(0.474654, 0.474654)
+script = ExtResource("1_ks4vk")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+scale = Vector2(2.66758, 2.68232)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture_filter = 1
+texture = ExtResource("2_507gs")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-23.9918, -11.93, -14.9949, -14.9125, 14.9949, -14.9125, 23.9918, -11.93, 14.9949, 14.9125, -14.9949, 14.9125)

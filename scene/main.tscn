@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://chaeir4y7baof"]
+[gd_scene load_steps=19 format=3 uid="uid://chaeir4y7baof"]
 
 [ext_resource type="Texture2D" uid="uid://cbmxe0xuykdw8" path="res://assets/kenney_input-prompts/Xbox Series/Vector/xbox_button_color_a_outline.svg" id="1_frpd5"]
 [ext_resource type="Texture2D" uid="uid://bpe64s1bcgrjw" path="res://assets/kenney_input-prompts/Generic/Vector/generic_button_square_fill.svg" id="1_pexq0"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b8ds3nvaenn6n" path="res://assets/kenney_input-prompts/Xbox Series/Vector/xbox_button_color_b_outline.svg" id="2_saqr7"]
 [ext_resource type="PackedScene" uid="uid://cqhi5uoir44xl" path="res://scene/balls/green.tscn" id="2_uo3ht"]
 [ext_resource type="PackedScene" uid="uid://du2hkcxq2n1vx" path="res://scene/balls/blue.tscn" id="2_vwg40"]
+[ext_resource type="Texture2D" uid="uid://basnd34bbnm7g" path="res://assets/kenney_input-prompts/PlayStation Series/Vector/playstation5_touchpad_outline.svg" id="3_0r13a"]
 [ext_resource type="Script" path="res://scripts/Manager.gd" id="3_8dwax"]
 [ext_resource type="PackedScene" uid="uid://cpwgolnbgtuiu" path="res://scene/pegs/round.tscn" id="3_b1ld2"]
 [ext_resource type="PackedScene" uid="uid://buqrunxh5mqpe" path="res://scene/balls/yellow.tscn" id="3_veuod"]
@@ -15,9 +16,10 @@
 [ext_resource type="Texture2D" uid="uid://yl1pnv6i2cof" path="res://assets/kenney_input-prompts/Playdate/Vector/playdate_dpad.svg" id="6_22qqj"]
 [ext_resource type="Script" path="res://scripts/sounds.gd" id="7_8jv5c"]
 [ext_resource type="PackedScene" uid="uid://dfa5gs1jfxgv0" path="res://scene/pegs/cross.tscn" id="14_4mnha"]
+[ext_resource type="PackedScene" uid="uid://c630ojv05jg54" path="res://scene/pegs/slider.tscn" id="15_ixwea"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rpm3j"]
-size = Vector2(20, 22.4698)
+size = Vector2(12.2035, 24.8447)
 
 [node name="Main" type="Node2D"]
 
@@ -34,7 +36,7 @@ position = Vector2(81, 142)
 scale = Vector2(14.6523, 19.3441)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Disable Spawn"]
-position = Vector2(0.409491, -0.232624)
+position = Vector2(0.750736, 1.60256)
 scale = Vector2(1.20799, 0.848943)
 shape = SubResource("RectangleShape2D_rpm3j")
 debug_color = Color(0, 1, 0.701961, 0.211765)
@@ -67,13 +69,15 @@ offset_bottom = 305.0
 [node name="Select Peg" type="ItemList" parent="Control/Box"]
 layout_mode = 2
 auto_height = true
-item_count = 2
+item_count = 3
 max_columns = 2
 icon_mode = 0
 item_0/text = ""
 item_0/icon = ExtResource("5_4iw6w")
 item_1/text = ""
 item_1/icon = ExtResource("6_22qqj")
+item_2/text = ""
+item_2/icon = ExtResource("3_0r13a")
 
 [node name="Select Ball" type="ItemList" parent="Control/Box"]
 layout_mode = 2
@@ -105,6 +109,7 @@ green_ball = ExtResource("2_uo3ht")
 red_ball = ExtResource("5_xrxle")
 round_peg = ExtResource("3_b1ld2")
 cross_peg = ExtResource("14_4mnha")
+slider_peg = ExtResource("15_ixwea")
 
 [node name="SoundManager" type="Control" parent="Manager"]
 layout_mode = 3
@@ -119,6 +124,7 @@ rotation = 1.0472
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Manager/Hex"]
 position = Vector2(-0.134033, 2.23206)
+scale = Vector2(1.0016, 1.00119)
 polygon = PackedVector2Array(70.775, -44.5861, 411.903, 4.56184, 603.902, -327.992, 390.774, -598.843, 33.6454, -620.278, 49.6454, -647.991, 406.773, -626.556, 636.687, -336.777, 420.688, 37.3465, 54.775, -16.8732, -142.354, -315.437, -126.354, -343.15)
 
 [node name="Sprite2D" type="Sprite2D" parent="Manager/Hex"]
