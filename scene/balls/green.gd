@@ -9,7 +9,7 @@ static var sounds_playing: int = 0
 
 
 func _ready():
-	var body: RigidBody2D = $RigidBody2D
+	var body: RigidBody2D = $Green
 	body.contact_monitor = true
 	body.max_contacts_reported = 5
 

@@ -49,6 +49,7 @@ func _process(_delta):
 
 func spawn_ball(position: Vector2, scn: PackedScene):
 	var ball = scn.instantiate()
+	scn.set_name(scn.get_name())
 	spawn_count += 1
 
 	# Add a random offset to the position

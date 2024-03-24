@@ -17,20 +17,20 @@ script = ExtResource("1_5seu8")
 collision_sound = ExtResource("2_vkbkd")
 collision_pitch = 1.51
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
+[node name="Blue" type="RigidBody2D" parent="."]
 mass = 0.73
 physics_material_override = SubResource("PhysicsMaterial_ytej1")
 max_contacts_reported = 5
 contact_monitor = true
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Blue"]
 texture_filter = 1
 texture = ExtResource("1_a0wsc")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Blue"]
 shape = SubResource("CircleShape2D_ry1sh")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="RigidBody2D"]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Blue"]
 scale = Vector2(3.828, 3.24)
 
-[connection signal="body_entered" from="RigidBody2D" to="." method="_on_rigid_body_2d_body_entered"]
+[connection signal="body_entered" from="Blue" to="." method="_on_rigid_body_2d_body_entered"]

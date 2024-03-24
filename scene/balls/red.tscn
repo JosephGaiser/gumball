@@ -11,24 +11,24 @@ bounce = 0.2
 [sub_resource type="CircleShape2D" id="CircleShape2D_ry1sh"]
 radius = 22.6667
 
-[node name="Ball" type="Node2D"]
+[node name="Red" type="Node2D"]
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_a7qml")
 collision_sound = ExtResource("2_u276q")
 collision_pitch = 0.405
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
+[node name="Red" type="RigidBody2D" parent="."]
 mass = 5.0
 physics_material_override = SubResource("PhysicsMaterial_ytej1")
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Red"]
 texture_filter = 1
 texture = ExtResource("1_gm7f3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Red"]
 shape = SubResource("CircleShape2D_ry1sh")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="RigidBody2D"]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Red"]
 scale = Vector2(3.828, 3.24)
 
-[connection signal="body_entered" from="RigidBody2D" to="." method="_on_rigid_body_2d_body_entered"]
+[connection signal="body_entered" from="Red" to="." method="_on_rigid_body_2d_body_entered"]
