@@ -1,12 +1,22 @@
-[gd_scene load_steps=10 format=3 uid="uid://chaeir4y7baof"]
+[gd_scene load_steps=18 format=3 uid="uid://chaeir4y7baof"]
 
+[ext_resource type="Texture2D" uid="uid://cbmxe0xuykdw8" path="res://assets/kenney_input-prompts/Xbox Series/Vector/xbox_button_color_a_outline.svg" id="1_frpd5"]
+[ext_resource type="Texture2D" uid="uid://bpe64s1bcgrjw" path="res://assets/kenney_input-prompts/Generic/Vector/generic_button_square_fill.svg" id="1_pexq0"]
+[ext_resource type="Texture2D" uid="uid://s42tuk0akthd" path="res://assets/kenney_input-prompts/Xbox Series/Vector/xbox_button_color_x_outline.svg" id="1_tysmt"]
+[ext_resource type="Texture2D" uid="uid://b8ds3nvaenn6n" path="res://assets/kenney_input-prompts/Xbox Series/Vector/xbox_button_color_b_outline.svg" id="2_saqr7"]
 [ext_resource type="PackedScene" uid="uid://cqhi5uoir44xl" path="res://scene/balls/green.tscn" id="2_uo3ht"]
 [ext_resource type="PackedScene" uid="uid://du2hkcxq2n1vx" path="res://scene/balls/blue.tscn" id="2_vwg40"]
 [ext_resource type="Script" path="res://scripts/Manager.gd" id="3_8dwax"]
-[ext_resource type="PackedScene" uid="uid://cpwgolnbgtuiu" path="res://scene/peg.tscn" id="3_b1ld2"]
+[ext_resource type="PackedScene" uid="uid://cpwgolnbgtuiu" path="res://scene/pegs/peg.tscn" id="3_b1ld2"]
 [ext_resource type="PackedScene" uid="uid://buqrunxh5mqpe" path="res://scene/balls/yellow.tscn" id="3_veuod"]
+[ext_resource type="Texture2D" uid="uid://r3f8y5rl7pa3" path="res://assets/kenney_input-prompts/Xbox Series/Vector/xbox_button_color_y_outline.svg" id="4_briu2"]
+[ext_resource type="Texture2D" uid="uid://bybftm4ra17a3" path="res://assets/kenney_input-prompts/Generic/Vector/generic_button_circle_outline.svg" id="5_4iw6w"]
 [ext_resource type="PackedScene" uid="uid://c0b4p4dt4sbgf" path="res://scene/balls/red.tscn" id="5_xrxle"]
+[ext_resource type="Texture2D" uid="uid://yl1pnv6i2cof" path="res://assets/kenney_input-prompts/Playdate/Vector/playdate_dpad.svg" id="6_22qqj"]
 [ext_resource type="Script" path="res://scripts/sounds.gd" id="7_8jv5c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rpm3j"]
+size = Vector2(20, 22.4698)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u1vxf"]
 size = Vector2(20.075, 34.5885)
@@ -14,7 +24,64 @@ size = Vector2(20.075, 34.5885)
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o8q72"]
 
 [node name="Main" type="Node2D"]
-position = Vector2(388, -85)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 336.0
+offset_top = 639.0
+offset_right = 524.0
+offset_bottom = 944.0
+
+[node name="Disable Spawn" type="Area2D" parent="Control"]
+position = Vector2(81, 142)
+scale = Vector2(14.6523, 19.3441)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Disable Spawn"]
+position = Vector2(0.409491, -0.232624)
+scale = Vector2(1.20799, 0.848943)
+shape = SubResource("RectangleShape2D_rpm3j")
+debug_color = Color(0, 1, 0.701961, 0.211765)
+
+[node name="Box" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 5.0
+offset_right = 169.0
+offset_bottom = 305.0
+
+[node name="Select Peg" type="ItemList" parent="Control/Box"]
+layout_mode = 2
+auto_height = true
+item_count = 2
+max_columns = 2
+icon_mode = 0
+item_0/text = ""
+item_0/icon = ExtResource("5_4iw6w")
+item_1/text = ""
+item_1/icon = ExtResource("6_22qqj")
+
+[node name="Select Ball" type="ItemList" parent="Control/Box"]
+layout_mode = 2
+auto_height = true
+item_count = 4
+max_columns = 2
+icon_mode = 0
+item_0/text = ""
+item_0/icon = ExtResource("1_frpd5")
+item_1/text = ""
+item_1/icon = ExtResource("2_saqr7")
+item_2/text = ""
+item_2/icon = ExtResource("1_tysmt")
+item_3/text = ""
+item_3/icon = ExtResource("4_briu2")
+
+[node name="Clear" type="Button" parent="Control/Box"]
+layout_mode = 2
+toggle_mode = true
+text = "CLEAR"
+icon = ExtResource("1_pexq0")
+flat = true
 
 [node name="Manager" type="Node" parent="."]
 script = ExtResource("3_8dwax")
@@ -31,20 +98,19 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("7_8jv5c")
 
-[node name="SpawnCount" type="Label" parent="Manager"]
+[node name="Count" type="Label" parent="Manager"]
 offset_left = 667.0
 offset_top = 747.0
-offset_right = 707.0
+offset_right = 677.0
 offset_bottom = 770.0
 text = "0"
 metadata/_edit_use_anchors_ = true
 
-[node name="Count" type="Label" parent="Manager"]
-offset_left = 1238.0
+[node name="SpawnCount" type="Label" parent="Manager"]
+offset_left = 689.0
 offset_top = 747.0
-offset_right = 1278.0
+offset_right = 1277.84
 offset_bottom = 770.0
-scale = Vector2(0.995934, 1.00363)
 text = "0"
 metadata/_edit_use_anchors_ = true
 
@@ -166,16 +232,16 @@ texture = SubResource("CompressedTexture2D_o8q72")
 scale = Vector2(46.52, 1)
 shape = SubResource("RectangleShape2D_u1vxf")
 
-[node name="Wall10" type="StaticBody2D" parent="Manager"]
+[node name="Floor" type="StaticBody2D" parent="Manager"]
 position = Vector2(964, 870)
 rotation = 3.14159
 scale = Vector2(0.381993, 1.00038)
 
-[node name="Sprite2D" type="Sprite2D" parent="Manager/Wall10"]
+[node name="Sprite2D" type="Sprite2D" parent="Manager/Floor"]
 scale = Vector2(3.15231, 0.149039)
 texture = SubResource("CompressedTexture2D_o8q72")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Manager/Wall10"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Manager/Floor"]
 scale = Vector2(46.52, 1)
 shape = SubResource("RectangleShape2D_u1vxf")
 
@@ -230,3 +296,11 @@ texture = SubResource("CompressedTexture2D_o8q72")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Manager/Wall5"]
 scale = Vector2(46.52, 1)
 shape = SubResource("RectangleShape2D_u1vxf")
+
+[connection signal="mouse_entered" from="Control/Disable Spawn" to="Manager" method="_on_disable_spawn_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Disable Spawn" to="Manager" method="_on_disable_spawn_mouse_exited"]
+[connection signal="item_selected" from="Control/Box/Select Peg" to="Manager" method="_on_select_peg_item_selected"]
+[connection signal="item_selected" from="Control/Box/Select Ball" to="Manager" method="_on_select_ball_item_selected"]
+[connection signal="button_down" from="Control/Box/Clear" to="Manager" method="_on_drop_button_down"]
+[connection signal="button_up" from="Control/Box/Clear" to="Manager" method="_on_drop_button_up"]
+[connection signal="pressed" from="Control/Box/Clear" to="Manager" method="_on_drop_pressed"]

@@ -6,18 +6,21 @@ extends Node
 @export var red_ball: PackedScene
 @export var peg_scene: PackedScene
 @export var spawn_count: int = 1
+@export var cooldown_length: float = .01
 
+@onready var floor_collision: CollisionShape2D = $Floor/CollisionShape2D
+@onready var peg_inventory: Dictionary = {"default_peg": {"scene": peg_scene, "count": 10}}
+@onready var active_ball_type: PackedScene = blue_ball
+@onready var cooldown: SceneTreeTimer = get_tree().create_timer(0)
+
+static var can_spawn_balls: bool = true
+var balls_count: int             = 0
 var active_peg: Node
-var cooldown: SceneTreeTimer
-var cooldown_length: float = .01
-var balls_count: int       = 0
-var ball_scenes: Array
+var active_peg_type: String      = "default_peg"
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	ball_scenes = [blue_ball, yellow_ball, red_ball, green_ball]
-	cooldown = get_tree().create_timer(0)
 	$SpawnCount.text = str(spawn_count)
 	$Count.text = str(balls_count)
 
@@ -29,8 +32,6 @@ func _process(delta):
 
 
 func spawn_ball(position: Vector2, scn: PackedScene):
-
-
 	var ball = scn.instantiate()
 	balls_count += 1
 
@@ -48,15 +49,35 @@ func spawn_ball(position: Vector2, scn: PackedScene):
 	add_child(ball)
 	$Count.text = str(balls_count)
 
-func _on_SpawnBall_pressed(event: InputEventMouseButton):
+
+func _on_SpawnBall_pressed(event: InputEventMouseButton) -> void:
+	if can_spawn_balls == false:
+		return
 	# handle / reset cooldoown
 	if cooldown.time_left != 0:
-		pass
+		return
 	cooldown = get_tree().create_timer(cooldown_length)
-	await get_tree().create_timer(.01).timeout
 	for n in spawn_count:
-		var random_scn = ball_scenes[randi() % ball_scenes.size()]
-		spawn_ball(event.position, random_scn)
+		spawn_ball(event.position, active_ball_type)
+
+
+func _on_SpawnPeg_pressed(event: InputEventMouseButton) -> void:
+	# handle / reset cooldown
+	if cooldown.time_left != 0:
+		return
+	cooldown = get_tree().create_timer(cooldown_length)
+
+	# Check if there are pegs in the inventory for the active peg type
+	if peg_inventory[active_peg_type]["count"] <= 0:
+		return
+
+	# Spawn the peg at the event position
+	if active_peg == null:
+		active_peg = peg_inventory[active_peg_type]["scene"].instantiate()
+		active_peg.position = event.position
+		add_child(active_peg)
+		# Decrement the peg inventory
+		peg_inventory[active_peg_type]["count"] -= 1
 
 
 func _input(event):
@@ -73,11 +94,42 @@ func _input(event):
 			_on_SpawnBall_pressed(event)
 
 		if Input.is_action_just_pressed("spawn_peg"):
-			if active_peg == null:
-				active_peg = peg_scene.instantiate()
-				active_peg.position = get_viewport().get_mouse_position()
-				add_child(active_peg)
+			_on_SpawnPeg_pressed(event)
 
 		if Input.is_action_just_released("spawn_peg"):
 			if active_peg != null:
 				active_peg = null
+
+
+func _on_drop_pressed():
+	for child in get_children():
+		if child is StaticBody2D:
+			child.get_node("CollisionShape2D").disabled = !child.get_node("CollisionShape2D").disabled
+
+
+func _on_select_peg_item_selected(index):
+	match index:
+		0:
+			active_peg_type = "default_peg"
+		1:
+			active_peg_type = "cross_peg"
+
+
+func _on_select_ball_item_selected(index):
+	match index:
+		0:
+			active_ball_type = green_ball
+		1:
+			active_ball_type = red_ball
+		2:
+			active_ball_type = blue_ball
+		3:
+			active_ball_type = yellow_ball
+
+
+func _on_disable_spawn_mouse_entered():
+	can_spawn_balls = false
+
+
+func _on_disable_spawn_mouse_exited():
+	can_spawn_balls = true
