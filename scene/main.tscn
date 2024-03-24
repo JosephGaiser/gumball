@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://chaeir4y7baof"]
+[gd_scene load_steps=20 format=3 uid="uid://chaeir4y7baof"]
 
 [ext_resource type="Texture2D" uid="uid://cbmxe0xuykdw8" path="res://assets/kenney_input-prompts/Xbox Series/Vector/xbox_button_color_a_outline.svg" id="1_frpd5"]
 [ext_resource type="Texture2D" uid="uid://bpe64s1bcgrjw" path="res://assets/kenney_input-prompts/Generic/Vector/generic_button_square_fill.svg" id="1_pexq0"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/Manager.gd" id="3_8dwax"]
 [ext_resource type="PackedScene" uid="uid://cpwgolnbgtuiu" path="res://scene/pegs/round.tscn" id="3_b1ld2"]
 [ext_resource type="PackedScene" uid="uid://buqrunxh5mqpe" path="res://scene/balls/yellow.tscn" id="3_veuod"]
+[ext_resource type="Script" path="res://scene/Select Peg.gd" id="4_0fp81"]
 [ext_resource type="Texture2D" uid="uid://r3f8y5rl7pa3" path="res://assets/kenney_input-prompts/Xbox Series/Vector/xbox_button_color_y_outline.svg" id="4_briu2"]
 [ext_resource type="Texture2D" uid="uid://bybftm4ra17a3" path="res://assets/kenney_input-prompts/Generic/Vector/generic_button_circle_outline.svg" id="5_4iw6w"]
 [ext_resource type="PackedScene" uid="uid://c0b4p4dt4sbgf" path="res://scene/balls/red.tscn" id="5_xrxle"]
@@ -27,9 +28,9 @@ size = Vector2(12.2035, 24.8447)
 layout_mode = 3
 anchors_preset = 0
 offset_left = 336.0
-offset_top = 639.0
+offset_top = 449.0
 offset_right = 524.0
-offset_bottom = 944.0
+offset_bottom = 754.0
 
 [node name="Disable Spawn" type="Area2D" parent="Control"]
 position = Vector2(81, 142)
@@ -42,7 +43,12 @@ shape = SubResource("RectangleShape2D_rpm3j")
 debug_color = Color(0, 1, 0.701961, 0.211765)
 
 [node name="Count" type="Label" parent="Control"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.425532
+anchor_top = 0.0983607
+anchor_right = 0.425532
+anchor_bottom = 0.0983607
 offset_left = 880.0
 offset_top = 169.0
 offset_right = 890.0
@@ -51,7 +57,12 @@ text = "0"
 metadata/_edit_use_anchors_ = true
 
 [node name="SpawnCount" type="Label" parent="Control"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.425532
+anchor_top = -0.00655738
+anchor_right = 0.425532
+anchor_bottom = -0.00655738
 offset_left = 880.0
 offset_top = 233.0
 offset_right = 1468.84
@@ -68,16 +79,17 @@ offset_bottom = 305.0
 
 [node name="Select Peg" type="ItemList" parent="Control/Box"]
 layout_mode = 2
+allow_search = false
 auto_height = true
 item_count = 3
 max_columns = 2
-icon_mode = 0
 item_0/text = ""
 item_0/icon = ExtResource("5_4iw6w")
 item_1/text = ""
 item_1/icon = ExtResource("6_22qqj")
 item_2/text = ""
 item_2/icon = ExtResource("3_0r13a")
+script = ExtResource("4_0fp81")
 
 [node name="Select Ball" type="ItemList" parent="Control/Box"]
 layout_mode = 2

@@ -22,6 +22,7 @@ extends Node
 @onready var ui_count = $"../Control/Count"
 @onready var ui_spawn_count = $"../Control/SpawnCount"
 @onready var hex: CollisionPolygon2D = $Hex/CollisionPolygon2D
+@onready var select_peg: ItemList = $"../Control/Box/Select Peg"
 
 var can_spawn_balls: bool = true
 var spawn_count: int      = 0
@@ -36,7 +37,12 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
+	for i in range(select_peg.get_item_count()):
+		var peg_type = PegType.values()[i]  # Assuming the order of items in select_peg matches the order of values in PegType
+		var count    = peg_inventory[peg_type]["count"]
+		select_peg.set_item_text(i, str(count))
+
 	if held_peg != null:
 		held_peg.position = get_viewport().get_mouse_position()
 
