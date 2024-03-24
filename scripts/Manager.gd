@@ -13,6 +13,9 @@ extends Node
 @onready var active_ball_type: PackedScene = blue_ball
 @onready var cooldown: SceneTreeTimer = get_tree().create_timer(0)
 
+@onready var ui_count = $"../Control/Count"
+@onready var ui_spawn_count = $"../Control/SpawnCount"
+
 static var can_spawn_balls: bool = true
 var balls_count: int             = 0
 var active_peg: Node
@@ -21,8 +24,8 @@ var active_peg_type: String      = "default_peg"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$SpawnCount.text = str(spawn_count)
-	$Count.text = str(balls_count)
+	ui_count.text = str(spawn_count)
+	ui_spawn_count.text = str(balls_count)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -47,7 +50,7 @@ func spawn_ball(position: Vector2, scn: PackedScene):
 	if body != null:
 		body.apply_impulse(Vector2(randf_range(min_x, max_x), randf_range(min_y, max_y)), position)
 	add_child(ball)
-	$Count.text = str(balls_count)
+	ui_spawn_count.text = str(balls_count)
 
 
 func _on_SpawnBall_pressed(event: InputEventMouseButton) -> void:
@@ -83,11 +86,11 @@ func _on_SpawnPeg_pressed(event: InputEventMouseButton) -> void:
 func _input(event):
 	if Input.is_action_just_pressed("increase_spawn"):
 		spawn_count += 1
-		$SpawnCount.text = str(spawn_count)
+		ui_count.text = str(spawn_count)
 	if Input.is_action_just_pressed("decrease_spawn"):
 		if spawn_count > 1:
 			spawn_count -= 1
-			$SpawnCount.text = str(spawn_count)
+			ui_count.text = str(spawn_count)
 
 	if event is InputEventMouseButton:
 		if Input.is_action_just_pressed("spawn_ball"):
