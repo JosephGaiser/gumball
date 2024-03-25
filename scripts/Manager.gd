@@ -35,16 +35,19 @@ func _ready():
 	ui_count.text = str(spawns_per_click)
 	ui_spawn_count.text = str(spawn_count)
 
-
+@onready var mouse = $"../Mouse"
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	var pos: Vector2 = get_viewport().get_mouse_position()
+	mouse.position = pos
+	if held_peg != null:
+		held_peg.position = pos
+
 	for i in range(select_peg.get_item_count()):
+		# TODO seems really inefficient to set every delta, use signal?
 		var peg_type = PegType.values()[i]  # Assuming the order of items in select_peg matches the order of values in PegType
 		var count    = peg_inventory[peg_type]["count"]
 		select_peg.set_item_text(i, str(count))
-
-	if held_peg != null:
-		held_peg.position = get_viewport().get_mouse_position()
 
 
 func spawn_ball(position: Vector2, scn: PackedScene):

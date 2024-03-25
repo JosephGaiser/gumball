@@ -1,6 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://chaeir4y7baof"]
+[gd_scene load_steps=24 format=3 uid="uid://chaeir4y7baof"]
 
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_ebp45"]
 [ext_resource type="Texture2D" uid="uid://cbmxe0xuykdw8" path="res://assets/kenney_input-prompts/Xbox Series/Vector/xbox_button_color_a_outline.svg" id="1_frpd5"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="1_mv6fd"]
 [ext_resource type="Texture2D" uid="uid://bpe64s1bcgrjw" path="res://assets/kenney_input-prompts/Generic/Vector/generic_button_square_fill.svg" id="1_pexq0"]
 [ext_resource type="Texture2D" uid="uid://s42tuk0akthd" path="res://assets/kenney_input-prompts/Xbox Series/Vector/xbox_button_color_x_outline.svg" id="1_tysmt"]
 [ext_resource type="Texture2D" uid="uid://b8ds3nvaenn6n" path="res://assets/kenney_input-prompts/Xbox Series/Vector/xbox_button_color_b_outline.svg" id="2_saqr7"]
@@ -10,6 +12,7 @@
 [ext_resource type="Script" path="res://scripts/Manager.gd" id="3_8dwax"]
 [ext_resource type="PackedScene" uid="uid://cpwgolnbgtuiu" path="res://scene/pegs/round.tscn" id="3_b1ld2"]
 [ext_resource type="PackedScene" uid="uid://buqrunxh5mqpe" path="res://scene/balls/yellow.tscn" id="3_veuod"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_yu7ix"]
 [ext_resource type="Script" path="res://scene/Select Peg.gd" id="4_0fp81"]
 [ext_resource type="Texture2D" uid="uid://r3f8y5rl7pa3" path="res://assets/kenney_input-prompts/Xbox Series/Vector/xbox_button_color_y_outline.svg" id="4_briu2"]
 [ext_resource type="Texture2D" uid="uid://bybftm4ra17a3" path="res://assets/kenney_input-prompts/Generic/Vector/generic_button_circle_outline.svg" id="5_4iw6w"]
@@ -19,10 +22,48 @@
 [ext_resource type="PackedScene" uid="uid://dfa5gs1jfxgv0" path="res://scene/pegs/cross.tscn" id="14_4mnha"]
 [ext_resource type="PackedScene" uid="uid://c630ojv05jg54" path="res://scene/pegs/slider.tscn" id="15_ixwea"]
 
+[sub_resource type="Resource" id="Resource_vrrah"]
+script = ExtResource("3_yu7ix")
+duration = 0.08
+transition = 1
+ease = 2
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rpm3j"]
 size = Vector2(12.2035, 24.8447)
 
 [node name="Main" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+editor_draw_limits = true
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("1_ebp45")
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+visible = false
+script = ExtResource("1_mv6fd")
+priority_override = false
+priority = 0
+zoom = Vector2(1, 1)
+follow_mode = 2
+follow_target = NodePath("../Mouse")
+follow_parameters/target_offset = Vector2(0, 0)
+follow_parameters/damping = true
+follow_parameters/damping_value = 2.614
+frame_preview = false
+pixel_perfect = true
+limit/draw_limits = true
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/limit_node_target = NodePath("")
+limit/smoothed = true
+tween_parameters = SubResource("Resource_vrrah")
+tween_on_load = false
+inactive_update_mode = 0
+
+[node name="Mouse" type="Node2D" parent="."]
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
