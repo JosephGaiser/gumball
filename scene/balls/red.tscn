@@ -29,6 +29,6 @@ texture = ExtResource("1_gm7f3")
 shape = SubResource("CircleShape2D_ry1sh")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Red"]
-scale = Vector2(3.828, 3.24)
+scale = Vector2(20, 16.928)
 
 [connection signal="body_entered" from="Red" to="." method="_on_rigid_body_2d_body_entered"]

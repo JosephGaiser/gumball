@@ -16,13 +16,15 @@ extends Node
 											 PegType.SLIDER: {"scene": slider_peg, "count": 3}
 										 }
 
-@onready var active_ball_type: PackedScene = blue_ball
+@onready var active_ball_type: PackedScene = green_ball
 @onready var active_peg_type: PegType = PegType.ROUND
 @onready var cooldown: SceneTreeTimer = get_tree().create_timer(0)
 @onready var ui_count = $"../Control/Count"
 @onready var ui_spawn_count = $"../Control/SpawnCount"
 @onready var hex: CollisionPolygon2D = $Hex/CollisionPolygon2D
 @onready var select_peg: ItemList = $"../Control/Box/Select Peg"
+@onready var disable_spawn = $"../Control/Disable Spawn"
+@onready var mouse = $"../Mouse"
 
 var can_spawn_balls: bool = true
 var spawn_count: int      = 0
@@ -35,7 +37,7 @@ func _ready():
 	ui_count.text = str(spawns_per_click)
 	ui_spawn_count.text = str(spawn_count)
 
-@onready var mouse = $"../Mouse"
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	var pos: Vector2 = get_viewport().get_mouse_position()
@@ -149,8 +151,8 @@ func _on_select_ball_item_selected(index):
 
 
 func _on_disable_spawn_mouse_entered():
-	can_spawn_balls = false
+	can_spawn_balls = true
 
 
 func _on_disable_spawn_mouse_exited():
-	can_spawn_balls = true
+	can_spawn_balls = false

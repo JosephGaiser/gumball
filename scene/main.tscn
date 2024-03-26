@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://chaeir4y7baof"]
+[gd_scene load_steps=22 format=3 uid="uid://chaeir4y7baof"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_ebp45"]
 [ext_resource type="Texture2D" uid="uid://cbmxe0xuykdw8" path="res://assets/kenney_input-prompts/Xbox Series/Vector/xbox_button_color_a_outline.svg" id="1_frpd5"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" path="res://scripts/Manager.gd" id="3_8dwax"]
 [ext_resource type="PackedScene" uid="uid://cpwgolnbgtuiu" path="res://scene/pegs/round.tscn" id="3_b1ld2"]
 [ext_resource type="PackedScene" uid="uid://buqrunxh5mqpe" path="res://scene/balls/yellow.tscn" id="3_veuod"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_yu7ix"]
 [ext_resource type="Script" path="res://scene/Select Peg.gd" id="4_0fp81"]
 [ext_resource type="Texture2D" uid="uid://r3f8y5rl7pa3" path="res://assets/kenney_input-prompts/Xbox Series/Vector/xbox_button_color_y_outline.svg" id="4_briu2"]
 [ext_resource type="Texture2D" uid="uid://bybftm4ra17a3" path="res://assets/kenney_input-prompts/Generic/Vector/generic_button_circle_outline.svg" id="5_4iw6w"]
@@ -22,16 +21,12 @@
 [ext_resource type="PackedScene" uid="uid://dfa5gs1jfxgv0" path="res://scene/pegs/cross.tscn" id="14_4mnha"]
 [ext_resource type="PackedScene" uid="uid://c630ojv05jg54" path="res://scene/pegs/slider.tscn" id="15_ixwea"]
 
-[sub_resource type="Resource" id="Resource_vrrah"]
-script = ExtResource("3_yu7ix")
-duration = 0.08
-transition = 1
-ease = 2
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rpm3j"]
-size = Vector2(12.2035, 24.8447)
+[sub_resource type="Environment" id="Environment_yd818"]
+ssao_enabled = true
+glow_enabled = true
 
 [node name="Main" type="Node2D"]
+position = Vector2(1, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 editor_draw_limits = true
@@ -39,19 +34,19 @@ editor_draw_limits = true
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("1_ebp45")
 
+[node name="Mouse" type="Node2D" parent="."]
+
 [node name="PhantomCamera2D" type="Node2D" parent="."]
-visible = false
 script = ExtResource("1_mv6fd")
 priority_override = false
 priority = 0
 zoom = Vector2(1, 1)
-follow_mode = 2
+follow_mode = 1
 follow_target = NodePath("../Mouse")
-follow_parameters/target_offset = Vector2(0, 0)
 follow_parameters/damping = true
 follow_parameters/damping_value = 2.614
 frame_preview = false
-pixel_perfect = true
+pixel_perfect = false
 limit/draw_limits = true
 limit/left = -10000000
 limit/top = -10000000
@@ -59,11 +54,9 @@ limit/right = 10000000
 limit/bottom = 10000000
 limit/limit_node_target = NodePath("")
 limit/smoothed = true
-tween_parameters = SubResource("Resource_vrrah")
+tween_parameters = null
 tween_on_load = false
 inactive_update_mode = 0
-
-[node name="Mouse" type="Node2D" parent="."]
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -77,11 +70,8 @@ offset_bottom = 754.0
 position = Vector2(81, 142)
 scale = Vector2(14.6523, 19.3441)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Disable Spawn"]
-position = Vector2(0.750736, 1.60256)
-scale = Vector2(1.20799, 0.848943)
-shape = SubResource("RectangleShape2D_rpm3j")
-debug_color = Color(0, 1, 0.701961, 0.211765)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Control/Disable Spawn"]
+polygon = PackedVector2Array(23.887, -20.6264, 12.9672, -3.25681, 22.2491, 13.6993, 51.7325, 13.6993, 61.0143, -4.08393, 50.0945, -20.6264)
 
 [node name="Count" type="Label" parent="Control"]
 layout_mode = 1
@@ -184,6 +174,9 @@ polygon = PackedVector2Array(70.775, -44.5861, 411.903, 4.56184, 603.902, -327.9
 texture_filter = 1
 position = Vector2(67.0742, -0.696263)
 scale = Vector2(-16.6451, 0.424453)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_yd818")
 
 [connection signal="mouse_entered" from="Control/Disable Spawn" to="Manager" method="_on_disable_spawn_mouse_entered"]
 [connection signal="mouse_exited" from="Control/Disable Spawn" to="Manager" method="_on_disable_spawn_mouse_exited"]
