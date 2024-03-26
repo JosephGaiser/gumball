@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://buqrunxh5mqpe"]
+[gd_scene load_steps=13 format=3 uid="uid://buqrunxh5mqpe"]
 
 [ext_resource type="Texture2D" uid="uid://bxdi8srlg8ek8" path="res://assets/kenney_input-prompts/Xbox Series/Default/xbox_button_color_y_outline.png" id="1_5yvbd"]
 [ext_resource type="Script" path="res://scene/balls/yellow.gd" id="1_kjy5c"]
 [ext_resource type="AudioStream" uid="uid://blyufg5ef0xjt" path="res://assets/audio/sound.wav" id="2_dm3gt"]
+[ext_resource type="Texture2D" uid="uid://b2m7dbggg30qs" path="res://assets/kenney_input-prompts/Xbox Series/Vector/xbox_button_color_y.svg" id="4_axvdd"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ytej1"]
 friction = 0.2
@@ -11,6 +12,43 @@ absorbent = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ry1sh"]
 radius = 22.6667
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rkint"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_74gur"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ephed"]
+curve = SubResource("Curve_74gur")
+
+[sub_resource type="Curve" id="Curve_apg00"]
+max_value = 3.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 3), 4.2, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gwcwm"]
+curve = SubResource("Curve_apg00")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4unyt"]
+lifetime_randomness = 0.63
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 14.45
+inherit_velocity_ratio = 0.567
+gravity = Vector3(0, 98, 0)
+scale_min = 0.1
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_ephed")
+scale_over_velocity_curve = SubResource("CurveTexture_gwcwm")
+anim_speed_max = 2.05
+turbulence_enabled = true
+turbulence_noise_strength = 0.0
+turbulence_noise_scale = 2.165
 
 [node name="Yellow" type="Node2D"]
 scale = Vector2(0.75, 0.75)
@@ -31,5 +69,18 @@ shape = SubResource("CircleShape2D_ry1sh")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Yellow"]
 scale = Vector2(20, 16.928)
+
+[node name="damage" type="GPUParticles2D" parent="Yellow"]
+material = SubResource("CanvasItemMaterial_rkint")
+emitting = false
+amount = 28
+amount_ratio = 0.4465
+process_material = SubResource("ParticleProcessMaterial_4unyt")
+texture = ExtResource("4_axvdd")
+lifetime = 3.85
+one_shot = true
+speed_scale = 2.45
+explosiveness = 0.25
+randomness = 0.55
 
 [connection signal="body_entered" from="Yellow" to="." method="_on_rigid_body_2d_body_entered"]
