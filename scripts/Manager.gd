@@ -21,9 +21,8 @@ extends Node
 @onready var cooldown: SceneTreeTimer = get_tree().create_timer(0)
 @onready var ui_count = $"../Control/Count"
 @onready var ui_spawn_count = $"../Control/SpawnCount"
-@onready var hex: CollisionPolygon2D = $Hex/CollisionPolygon2D
+@onready var hex = $Level/Hex/CollisionPolygon2D
 @onready var select_peg: ItemList = $"../Control/Box/Select Peg"
-@onready var disable_spawn = $"../Control/Disable Spawn"
 @onready var mouse = $"../Mouse"
 
 var can_spawn_balls: bool = true

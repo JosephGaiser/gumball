@@ -69,7 +69,7 @@ texture = ExtResource("1_a0wsc")
 shape = SubResource("CircleShape2D_ry1sh")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Blue"]
-scale = Vector2(20, 16.927)
+scale = Vector2(150, 126.952)
 
 [node name="damage" type="GPUParticles2D" parent="Blue"]
 material = SubResource("CanvasItemMaterial_ij7xj")

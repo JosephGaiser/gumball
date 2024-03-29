@@ -22,6 +22,8 @@
 [ext_resource type="PackedScene" uid="uid://c630ojv05jg54" path="res://scene/pegs/slider.tscn" id="15_ixwea"]
 
 [sub_resource type="Environment" id="Environment_yd818"]
+background_mode = 1
+background_color = Color(1, 0, 0, 1)
 ssao_enabled = true
 glow_enabled = true
 
@@ -65,13 +67,6 @@ offset_left = 336.0
 offset_top = 449.0
 offset_right = 524.0
 offset_bottom = 754.0
-
-[node name="Disable Spawn" type="Area2D" parent="Control"]
-position = Vector2(81, 142)
-scale = Vector2(14.6523, 19.3441)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Control/Disable Spawn"]
-polygon = PackedVector2Array(23.887, -20.6264, 12.9672, -3.25681, 22.2491, 13.6993, 51.7325, 13.6993, 61.0143, -4.08393, 50.0945, -20.6264)
 
 [node name="Count" type="Label" parent="Control"]
 layout_mode = 1
@@ -161,27 +156,78 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("7_8jv5c")
 
-[node name="Hex" type="StaticBody2D" parent="Manager"]
-position = Vector2(568, 472)
-rotation = 1.0472
+[node name="Level" type="Node2D" parent="Manager"]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Manager/Hex"]
-position = Vector2(-0.134033, 2.23206)
+[node name="Hex" type="StaticBody2D" parent="Manager/Level"]
+position = Vector2(960, 544)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Manager/Level/Hex"]
+position = Vector2(152, 224)
 scale = Vector2(1.0016, 1.00119)
-polygon = PackedVector2Array(70.775, -44.5861, 411.903, 4.56184, 603.902, -327.992, 390.774, -598.843, 33.6454, -620.278, 49.6454, -647.991, 406.773, -626.556, 636.687, -336.777, 420.688, 37.3465, 54.775, -16.8732, -142.354, -315.437, -126.354, -343.15)
+polygon = PackedVector2Array(-471.246, -255.696, -327.476, 39.9525, 23.9617, 39.9525, 167.732, -255.696, 7.9873, -575.315, 39.9362, -575.315, 199.681, -255.696, 39.9362, 63.924, -343.45, 63.924, -503.195, -255.696, -343.45, -575.315, -311.502, -575.315)
 
-[node name="Sprite2D" type="Sprite2D" parent="Manager/Hex"]
-texture_filter = 1
-position = Vector2(67.0742, -0.696263)
-scale = Vector2(-16.6451, 0.424453)
+[node name="Disable Spawn" type="Area2D" parent="Manager/Level"]
+position = Vector2(418, 591)
+scale = Vector2(14.6523, 19.3441)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Manager/Level/Disable Spawn"]
+polygon = PackedVector2Array(23.887, -20.6264, 12.9672, -4.08393, 23.887, 12.4586, 50.0945, 12.4586, 61.0143, -4.08393, 50.0945, -20.6264)
+
+[node name="Heal" type="StaticBody2D" parent="Manager/Level"]
+position = Vector2(1384, 1248)
+
+[node name="Exterior" type="CollisionPolygon2D" parent="Manager/Level/Heal"]
+position = Vector2(152, 224)
+scale = Vector2(1.0016, 1.00119)
+polygon = PackedVector2Array(-479.233, -255.696, -383.387, 39.9524, 79.8723, 39.9525, 79.8723, -255.696, 103.834, -255.696, 103.834, 63.9239, -407.348, 63.9239, -511.182, -255.696)
+
+[node name="Interior" type="Area2D" parent="Manager/Level/Heal"]
+
+[node name="Collision" type="CollisionPolygon2D" parent="Manager/Level/Heal/Interior"]
+visible = false
+position = Vector2(152, 224)
+scale = Vector2(1.0016, 1.00119)
+polygon = PackedVector2Array(-479.233, -255.696, -383.387, 39.9524, 87.8595, 39.9524, 167.732, -255.696)
+
+[node name="Damage" type="StaticBody2D" parent="Manager/Level"]
+position = Vector2(544, 1248)
+
+[node name="Exterior" type="CollisionPolygon2D" parent="Manager/Level/Damage"]
+position = Vector2(152, 224)
+scale = Vector2(1.0016, 1.00119)
+polygon = PackedVector2Array(-383.387, -255.696, -383.387, 39.9524, 87.8595, 39.9524, 167.732, -255.696, 199.68, -255.696, 103.834, 63.9239, -407.348, 63.9239, -407.348, -255.696)
+
+[node name="Interior" type="Area2D" parent="Manager/Level/Damage"]
+
+[node name="Collision" type="CollisionPolygon2D" parent="Manager/Level/Damage/Interior"]
+visible = false
+position = Vector2(152, 224)
+scale = Vector2(1.0016, 1.00119)
+polygon = PackedVector2Array(-479.233, -255.696, -383.387, 39.9524, 87.8595, 39.9524, 167.732, -255.696)
+
+[node name="Crit" type="StaticBody2D" parent="Manager/Level"]
+position = Vector2(960, 1248)
+
+[node name="Exterior" type="CollisionPolygon2D" parent="Manager/Level/Crit"]
+position = Vector2(152, 224)
+scale = Vector2(1.0016, 1.00119)
+polygon = PackedVector2Array(-215.655, -255.696, -279.553, 39.9525, -15.9744, 39.9525, -87.8594, -255.696, 15.9745, 63.924, -311.502, 63.924)
+
+[node name="Interior" type="Area2D" parent="Manager/Level/Crit"]
+
+[node name="Collision" type="CollisionPolygon2D" parent="Manager/Level/Crit/Interior"]
+visible = false
+position = Vector2(152, 224)
+scale = Vector2(1.0016, 1.00119)
+polygon = PackedVector2Array(-223.642, -215.743, -279.553, 39.9525, -15.9744, 39.9525, -79.8722, -215.743)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yd818")
 
-[connection signal="mouse_entered" from="Control/Disable Spawn" to="Manager" method="_on_disable_spawn_mouse_entered"]
-[connection signal="mouse_exited" from="Control/Disable Spawn" to="Manager" method="_on_disable_spawn_mouse_exited"]
 [connection signal="item_selected" from="Control/Box/Select Peg" to="Manager" method="_on_select_peg_item_selected"]
 [connection signal="item_selected" from="Control/Box/Select Ball" to="Manager" method="_on_select_ball_item_selected"]
 [connection signal="button_down" from="Control/Box/Clear" to="Manager" method="_on_drop_button_down"]
 [connection signal="button_up" from="Control/Box/Clear" to="Manager" method="_on_drop_button_up"]
 [connection signal="pressed" from="Control/Box/Clear" to="Manager" method="_on_drop_pressed"]
+[connection signal="mouse_entered" from="Manager/Level/Disable Spawn" to="Manager" method="_on_disable_spawn_mouse_entered"]
+[connection signal="mouse_exited" from="Manager/Level/Disable Spawn" to="Manager" method="_on_disable_spawn_mouse_exited"]
