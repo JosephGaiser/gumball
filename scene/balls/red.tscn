@@ -54,6 +54,7 @@ scale = Vector2(0.75, 0.75)
 script = ExtResource("1_a7qml")
 collision_sound = ExtResource("2_u276q")
 collision_pitch = 0.405
+max_sounds = 20
 
 [node name="Red" type="RigidBody2D" parent="."]
 mass = 5.0

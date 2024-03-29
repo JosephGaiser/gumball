@@ -68,7 +68,8 @@ func _on_rigid_body_2d_body_entered(body) -> void:
 		"Blue": touched_by_blue()
 	if health <= 0:
 		queue_free()
-	if sounds_playing < max_sounds:
+	if sounds_playing <= max_sounds:
 		sounds_playing += 1
 		var player: AudioStreamPlayer = SoundManager.play_sound_with_pitch(collision_sound, collision_pitch)
+		await player.finished
 		sounds_playing -= 1

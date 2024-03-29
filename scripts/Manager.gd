@@ -8,7 +8,7 @@ extends Node
 @export var cross_peg: PackedScene
 @export var slider_peg: PackedScene
 @export var spawns_per_click: int = 1
-@export var cooldown_length: float = .01
+@export var cooldown_length: float = 1.0
 
 @onready var peg_inventory: Dictionary = {
 											 PegType.ROUND: {"scene": round_peg, "count": 5},
@@ -19,11 +19,11 @@ extends Node
 @onready var active_ball_type: PackedScene = green_ball
 @onready var active_peg_type: PegType = PegType.ROUND
 @onready var cooldown: SceneTreeTimer = get_tree().create_timer(0)
-@onready var ui_count = $"../Control/Count"
-@onready var ui_spawn_count = $"../Control/SpawnCount"
-@onready var hex = $Level/Hex/CollisionPolygon2D
-@onready var select_peg: ItemList = $"../Control/Box/Select Peg"
-@onready var mouse = $"../Mouse"
+@onready var ui_count: Label = %Count
+@onready var ui_spawn_count: Label = %SpawnCount
+@onready var level_collision: CollisionPolygon2D = %LevelCollision
+@onready var select_peg: ItemList = %"Select Peg"
+@onready var mouse: Node2D = %Mouse
 
 var can_spawn_balls: bool = true
 var spawn_count: int      = 0
@@ -124,7 +124,7 @@ func _input(event):
 
 func _on_drop_pressed():
 	can_spawn_balls = false
-	hex.disabled = !hex.disabled
+	level_collision.disabled = !level_collision.disabled
 
 
 func _on_select_peg_item_selected(index):

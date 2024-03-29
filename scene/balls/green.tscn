@@ -54,6 +54,7 @@ scale = Vector2(0.75, 0.75)
 script = ExtResource("1_jsgsn")
 collision_sound = ExtResource("2_fwy74")
 collision_pitch = 1.0
+max_sounds = 20
 
 [node name="Green" type="RigidBody2D" parent="."]
 mass = 0.75

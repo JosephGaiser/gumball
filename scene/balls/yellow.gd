@@ -59,17 +59,17 @@ func touched_by_yellow():
 
 
 func _on_rigid_body_2d_body_entered(body) -> void:
-	return # TODO implement
-#    if body == null:
-#        return
-#    match body.get_name():
-#        "Yellow": touched_by_yellow()
-#        "Red": touched_by_red()
-#        "Green": touched_by_green()
-#        "Blue": touched_by_blue()
-#    if health <= 0:
-#        queue_free()
-#    if sounds_playing < max_sounds:
-#        sounds_playing += 1
-#        var player: AudioStreamPlayer = SoundManager.play_sound_with_pitch(collision_sound, collision_pitch)
-#        sounds_playing -= 1
+	if body == null:
+		return
+	match body.get_name():
+		"Yellow": touched_by_yellow()
+		"Red": touched_by_red()
+		"Green": touched_by_green()
+		"Blue": touched_by_blue()
+	if health <= 0:
+		queue_free()
+	if sounds_playing <= max_sounds:
+		sounds_playing += 1
+		var player: AudioStreamPlayer = SoundManager.play_sound_with_pitch(collision_sound, collision_pitch)
+		await player.finished
+		sounds_playing -= 1
